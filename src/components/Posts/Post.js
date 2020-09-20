@@ -1,11 +1,11 @@
 import React from 'react';
 import Comments from '../Comments/Comments';
+import CommentForm from '../Comments/CommentForm'
 import LikeSection from './LikeSection';
 import PostHeader from './PostHeader';
 
 const Post = props => {
-  // 🔥 Make sure the parent of Post is passing the right props!
-  const { post, likePost } = props;
+  const { post, likePost, unlikePost, addComment } = props;
 
   return (
     <div className='post-border'>
@@ -21,9 +21,9 @@ const Post = props => {
         />
       </div>
       {/* Is LikeSection getting all the props it needs to work correctly? */}
-      <LikeSection likePost={() => likePost(post.id)} />
-      {/* Comments also wants its props! */}
-      <Comments />
+      <LikeSection likePost={() => likePost(post.id)} unlikePost={() => unlikePost(post.id)} numberOfLikes={post.likes} />
+      <CommentForm addComment={text => addComment(post.id, text)} />
+      <Comments comments={post.comments} />
     </div>
   );
 };
